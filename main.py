@@ -12,12 +12,12 @@ costumers_from_france = db.pretty_print("SELECT COUNT(*) FROM Customer WHERE Cus
 
 song_name = db.pretty_print("SELECT COUNT (*) FROM Track WHERE Track.Composer = 'AC/DC'")
 
-# What order (Invoice) was the most expensive? Which one was the cheapest?
+# What order (Invoice) was the most expensive? Which one was the cheapest
 min_order = db.pretty_print("SELECT MIN (Total) AS Smallest FROM Invoice")
 
 max_order = db.pretty_print("SELECT MAX (Total) AS MostExpansive FROM Invoice")
 
-# Which city (BillingCity) has the most orders?
+# Which city (BillingCity) has the most orders
 db.pretty_print('SELECT BillingCity, COUNT(InvoiceId) AS MostOrders FROM Invoice GROUP BY BillingCity ORDER BY '
                 'MostOrders DESC')
 
@@ -26,7 +26,7 @@ media_type = db.pretty_print("""SELECT COUNT (*) FROM Track
                              JOIN MediaType ON MediaType.MediaTypeId = Track.MediaTypeId
                              WHERE MediaType.Name = 'Protected AAC audio file'""")
 
-# Find out what Artist has the most albums?
+# Find out what Artist has the most albums
 most_albums = db.pretty_print("""SELECT Artist.Name, COUNT(*) AS MostAlbums
                               FROM Artist
                               JOIN Album ON Album.ArtistId = Artist.ArtistId
@@ -34,7 +34,7 @@ most_albums = db.pretty_print("""SELECT Artist.Name, COUNT(*) AS MostAlbums
                               ORDER BY MostAlbums DESC
                               """)
 
-# What genre has the most tracks?
+# What genre has the most tracks
 most_tracks = db.pretty_print("""SELECT Genre.Name, COUNT(*) AS MostTracks
                               FROM Genre
                               JOIN Track ON Track.GenreId = Genre.GenreId
@@ -42,7 +42,7 @@ most_tracks = db.pretty_print("""SELECT Genre.Name, COUNT(*) AS MostTracks
                               ORDER BY MostTracks DESC
                               """)
 
-# Which customer spent the most money so far?
+# Which customer spent the most money so far
 most_money = db.pretty_print("""SELECT Customer.FirstName, Customer.LastName, SUM(Invoice.Total) AS MostMoney
                              FROM Customer
                              JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId
@@ -50,7 +50,7 @@ most_money = db.pretty_print("""SELECT Customer.FirstName, Customer.LastName, SU
                              ORDER BY MostMoney DESC
                              """)
 
-# What songs were bought with each order?
+# What songs were bought with each order
 bought_songs = db.pretty_print("""SELECT Invoice.InvoiceId, Track.Name
                                FROM Invoice
                                JOIN InvoiceLine ON InvoiceLine.InvoiceId = Invoice.InvoiceId
